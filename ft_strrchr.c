@@ -23,5 +23,5 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)&s[sz_temp]);
 		sz_temp--;
 	}
-	return ((char*)0);
+	return ((char *)0);
 }

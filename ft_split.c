@@ -23,9 +23,8 @@ char	**ft_split(char const *s, char c)
 	int		substring;
 	char	*str;
 
-	if(!s)
+	if (!s)
 		return (NULL);
-
 	str = (char *)s;
 	offset = 0;
 	splits = count_splits(str, c);

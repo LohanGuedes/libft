@@ -21,7 +21,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		return ((char *)haystack);
 	while (*haystack != '\0' && len_needle <= len)
 	{
-		if(!(ft_memcmp(haystack, needle, len_needle)))
+		if (!(ft_memcmp(haystack, needle, len_needle)))
 			return ((char *)haystack);
 		haystack++;
 		len--;
