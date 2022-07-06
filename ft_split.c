@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
+/*   By: lguedes <lguedes@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 11:35:39 by vsergio           #+#    #+#             */
-/*   Updated: 2022/05/21 00:22:07 by vsergio          ###   ########.fr       */
+/*   Created: 2022/05/24 15:14:41 by lguedes           #+#    #+#             */
+/*   Updated: 2022/05/24 15:14:43 by lguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	count_splits(char *s, char c);
 static int	sub_len(char *s, char c);
+static void	free_fail(char **s, size_t len);
 
 char	**ft_split(char const *s, char c)
 {
@@ -23,8 +24,6 @@ char	**ft_split(char const *s, char c)
 	int		substring;
 	char	*str;
 
-	if (!s)
-		return (NULL);
 	str = (char *)s;
 	offset = 0;
 	splits = count_splits(str, c);
@@ -37,7 +36,9 @@ char	**ft_split(char const *s, char c)
 		while (*str != '\0' && *str == c)
 			str++;
 		substring = sub_len(str, c);
-		final[offset++] = ft_substr(str, 0, substring);
+		final[offset] = ft_substr(str, 0, substring);
+		if (!final[offset++])
+			free_fail(final, offset);
 		str += substring;
 	}
 	return (final);
@@ -72,4 +73,11 @@ static int	sub_len(char *str, char c)
 		len++;
 	}
 	return (len);
+}
+
+static void	free_fail(char **s, size_t len)
+{
+	while (len-- > 0)
+		free(s[len]);
+	free(s);
 }

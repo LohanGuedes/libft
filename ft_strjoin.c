@@ -26,8 +26,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	total = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (total == NULL)
 		return (NULL);
-	while (str1[i++] != '\0')
+	while (str1[i] != '\0')
+	{
 		total[i] = str1[i];
+		i++;
+	}
 	j = 0;
 	while (s2[j] != '\0')
 		total[i++] = s2[j++];
